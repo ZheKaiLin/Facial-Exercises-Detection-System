@@ -1,0 +1,96 @@
+<訓練>
+
+訓練b16e250:
+python train_dual.py --workers 10 --device 0 --batch-size 16 --data face_dataset.yaml --img 224 --cfg models/detect/yolov9-t.yaml --weights yolov9-t.pt --name b16_e250 --epochs 250 --hyp data/hyps/hyp.scratch-high.yaml --save-period 25
+
+
+訓練b32e250:
+python train_dual.py --workers 10 --device 0 --batch-size 32 --data face_dataset.yaml --img 224 --cfg models/detect/yolov9-t.yaml --weights yolov9-t.pt --name b32_e250 --epochs 250 --hyp data/hyps/hyp.scratch-high.yaml --save-period 25
+250 epochs completed in 2.423 hours.
+
+
+訓練b64e250:
+python train_dual.py --workers 10 --device 0 --batch-size 64 --data face_dataset.yaml --img 224 --cfg models/detect/yolov9-t.yaml --weights yolov9-t.pt --name b64_e250 --epochs 250 --hyp data/hyps/hyp.scratch-high.yaml --save-period 25
+250 epochs completed in 1.420 hours.
+
+
+
+-------------------------------------------------------------------------------------------------------------
+<驗證>
+
+b16e250
+python val_dual.py --data face_dataset.yaml --weights runs/train/b16_e250/weights/best.pt --img 224 --device 0 --exist-ok --task val --project runs/val --name b16_225
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████
+                   all        257        257      0.954      0.984      0.996      0.945
+                 angry        257         36      0.919          1      0.991      0.922
+                 happy        257         43      0.969          1          1      0.965
+               neutral        257        101      0.934          1          1      0.944
+                   sad        257         29          1      0.922      0.991       0.94
+             surprised        257         48      0.949          1          1      0.956
+
+b32e250
+python val_dual.py --data face_dataset.yaml --weights runs/train/b32_e250/weights/best.pt --img 224 --device 0 --exist-ok --task val --project runs/val --name b32_225
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%
+                   all        257        257      0.995      0.995          1      0.951
+                 angry        257         36      0.986          1          1      0.941
+                 happy        257         43      0.996          1          1      0.965
+               neutral        257        101          1      0.977          1      0.944
+                   sad        257         29      0.998          1          1      0.949
+             surprised        257         48      0.996          1          1      0.954
+    
+b64e250
+python val_dual.py --data face_dataset.yaml --weights runs/train/b64_e250/weights/best.pt --img 224 --device 0 --exist-ok --task val --project runs/val --name b64_221
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████
+                   all        257        257       0.99      0.994      0.999      0.951
+                 angry        257         36      0.997          1          1      0.937
+                 happy        257         43      0.997          1          1      0.958
+               neutral        257        101          1      0.971          1      0.941
+                   sad        257         29      0.958          1      0.999      0.963
+             surprised        257         48      0.997          1          1      0.959 
+
+--------------------------------------------------------------------------------------------------------
+
+<測試集>
+
+
+<100>
+python val_dual.py --weights runs/train/b32_e250/weights/best.pt --data face_dataset_100.yaml --img 224 --task test --device 0 --verbose --save-txt --save-conf --name pooled_test_100
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████
+                   all        100        100      0.804       0.83      0.824      0.223
+                 angry        100         20      0.651        0.8      0.774      0.164
+                 happy        100         20      0.713       0.95      0.869      0.233
+               neutral        100         20      0.902        0.8      0.824      0.232
+                   sad        100         20      0.868        0.7      0.752      0.197
+             surprised        100         20      0.887        0.9        0.9      0.291
+
+<200>
+python val_dual.py --weights runs/train/b32_e250/weights/best.pt --data face_dataset_200.yaml --img 224 --task test --device 0 --verbose --save-txt --save-conf --name pooled_test_200
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████
+                   all        200        200       0.89       0.91      0.939      0.822
+                 angry        200         40      0.813      0.925      0.912      0.734
+                 happy        200         40      0.838      0.975      0.924      0.808
+               neutral        200         40      0.856      0.893      0.939      0.859
+                   sad        200         40      0.946      0.882      0.957      0.844
+             surprised        200         40      0.994      0.875      0.962      0.866
+
+<300>
+python val_dual.py --weights runs/train/b32_e250/weights/best.pt --data face_dataset_300.yaml --img 224 --task test --device 0 --verbose --save-txt --save-conf --name pooled_test_300
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%
+                   all        300        300      0.859      0.886      0.896      0.561
+                 angry        300         60      0.756      0.867      0.873      0.488
+                 happy        300         60      0.796      0.978      0.893       0.53
+               neutral        300         60       0.87      0.867      0.895      0.609
+                   sad        300         60      0.908      0.822      0.892      0.581
+             surprised        300         60      0.964      0.894      0.929      0.596
+
+
+
+
+<export.py>
+python export.py --weights "runs\train\b32_e250\weights\best.pt" --imgsz 224 224 --device cpu --include onnx --simplify

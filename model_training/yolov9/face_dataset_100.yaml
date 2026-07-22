@@ -1,0 +1,6 @@
+train: v4_data_final/images/train
+val: v4_data_final/images/val
+test: v4_data_final/images/test_100
+
+nc: 5
+names: ['angry', 'happy' , 'neutral' , 'sad' , 'surprised' ]
