@@ -1,5 +1,7 @@
 # Facial Exercises Feedback System｜臉部運動即時回饋系統
 
+*繁體中文 | [English](README.en.md)*
+
 結合 YOLO 輕量化表情偵測模型與 MediaPipe 臉部特徵點，即時引導使用者進行臉部訓練，並自動記錄動作幅度以評估短期間的訓練成效。
 
 - 表情辨識類別：`angry`、`happy`、`neutral`、`sad`、`surprised`
