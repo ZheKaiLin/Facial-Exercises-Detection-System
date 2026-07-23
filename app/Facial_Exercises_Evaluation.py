@@ -281,7 +281,7 @@ def _make_phase_objects(phase):
 def evaluation_run(weights=None, source="0"):
     save_dir  = _get_save_dir()
     auto_pid  = _auto_participant_id(save_dir)
-    onnx_path = str(weights or _find_resource("v7best.onnx"))
+    onnx_path = str(weights or _find_resource("v9best.onnx"))
 
     print(f"========== 評估流程啟動 ==========")
     print(f"受試者編號：P{auto_pid}")

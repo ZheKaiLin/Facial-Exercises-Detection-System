@@ -3734,7 +3734,7 @@ class SoundManager:
 # 主程式
 # ==========================================================
 def run(
-    weights=ROOT / "weights" / "v7best.onnx",
+    weights=ROOT / "weights" / "v9best.onnx",
     source="0",
     imgsz=(224, 224),
     conf_thres=0.01,
@@ -4119,7 +4119,7 @@ def parse_opt():
     parser.add_argument(
         "--weights",
         type=str,
-        default=str(SCRIPT_DIR / "weights" / "v7best.onnx")
+        default=str(SCRIPT_DIR / "weights" / "v9best.onnx")
     )
 
     parser.add_argument(
